@@ -2372,5 +2372,17 @@
     "favorite_override": null,
     "listen_more": false,
     "notes": ""
+  },
+  "Earl Sweatshirt": {
+    "tags": [
+      "lyrical boom bap",
+      "rap"
+    ],
+    "moods": [],
+    "energy": 3,
+    "era": "10s",
+    "favorite_override": null,
+    "listen_more": false,
+    "notes": ""
   }
 }
