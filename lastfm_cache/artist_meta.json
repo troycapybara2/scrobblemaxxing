@@ -2384,5 +2384,14 @@
     "favorite_override": null,
     "listen_more": false,
     "notes": ""
+  },
+  "Grateful Dead": {
+    "tags": [],
+    "moods": [],
+    "energy": 4,
+    "era": "70s",
+    "favorite_override": null,
+    "listen_more": false,
+    "notes": ""
   }
 }
