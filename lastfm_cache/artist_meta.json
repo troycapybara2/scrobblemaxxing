@@ -2393,5 +2393,16 @@
     "favorite_override": null,
     "listen_more": false,
     "notes": ""
+  },
+  "Kanye West": {
+    "tags": [
+      "rap"
+    ],
+    "moods": [],
+    "energy": 3,
+    "era": "10s",
+    "favorite_override": null,
+    "listen_more": false,
+    "notes": ""
   }
 }
