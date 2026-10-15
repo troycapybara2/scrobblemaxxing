@@ -19,7 +19,7 @@ USER = os.environ.get("LASTFM_USER", "troycapybara")
 API_KEY = os.environ["LASTFM_API_KEY"]
 API = "https://ws.audioscrobbler.com/2.0/"
 OUT = "data/album_art.json"
-LIMIT = 1250
+LIMIT = 985
 SIZE = 120  # pixels on the long side
 PLACEHOLDER = "2a96cbd8b46e442fc41c2b86b821562f"  # Last.fm's blank star image
 
