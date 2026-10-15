@@ -1,0 +1,47 @@
+name: Last.fm snapshot
+
+on:
+  schedule:
+    - cron: "17 */12 * * *"   # twice a day, 12:17am and 12:17pm UTC
+  workflow_dispatch:           # adds a "Run workflow" button for manual runs
+
+permissions:
+  contents: write              # lets the built-in token commit to this repo
+
+concurrency:
+  group: lastfm-snapshot
+  cancel-in-progress: false
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install requests pillow
+
+      - name: Take snapshot and pull new scrobbles
+        run: python scripts/snapshot.py
+        env:
+          LASTFM_API_KEY: ${{ secrets.LASTFM_API_KEY }}
+
+      - name: Album art thumbnails
+        run: python scripts/album_art.py
+        continue-on-error: true      # a hiccup here never blocks the snapshot
+        env:
+          LASTFM_API_KEY: ${{ secrets.LASTFM_API_KEY }}
+
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add lastfm_cache/leaderboard_history_actions.json lastfm_cache/actions_last_top500.json data/scrobbles.csv
+          git add data/album_art.json 2>/dev/null || true
+          git diff --cached --quiet || git commit -m "Scheduled Last.fm snapshot"
+          git pull --rebase origin main
+          git push
