@@ -2404,5 +2404,24 @@
     "favorite_override": null,
     "listen_more": false,
     "notes": ""
+  },
+  "Phoebe Bridgers": {
+    "tags": [
+      "female",
+      "indie",
+      "indie rock",
+      "indie pop"
+    ],
+    "moods": [
+      "angsty",
+      "chill",
+      "depressed",
+      "moody"
+    ],
+    "energy": 5,
+    "era": "10s",
+    "favorite_override": null,
+    "listen_more": false,
+    "notes": ""
   }
 }
