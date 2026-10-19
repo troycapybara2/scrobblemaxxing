@@ -2423,5 +2423,19 @@
     "favorite_override": null,
     "listen_more": false,
     "notes": ""
+  },
+  "You Blew It!": {
+    "tags": [
+      "emo"
+    ],
+    "moods": [
+      "angsty",
+      "khaki shorts"
+    ],
+    "energy": 2,
+    "era": "10s",
+    "favorite_override": null,
+    "listen_more": true,
+    "notes": ""
   }
 }
