@@ -4,7 +4,7 @@ Live dashboard: https://claude.ai/artifact/VooHx7b7siDnZjmLSDKAYB
 
 To refresh (one upload, one commit):
 1. Pull this Almanac folder from the repo, then run `bash fetch.sh`. It pins to the newest commit, pulls data/scrobbles.csv and lastfm_cache/leaderboard_history.json, rebuilds df_raw.pkl and puts art3.json in /tmp.
-2. Pull Capy's own lane tags: with the Artifact tool, read_db on the artifact, collection `data/users/me`, doc `lf-tags`. Save its data as my_tags.json in this folder ({"tags": [{"artist", "lane", "at"}, ...]}). If there's no such doc, skip this. buckets6.py applies these tags over its own lists, and they always win. Mention any newly applied tags in the reply.
+2. Pull Capy's own lane tags: with the Artifact tool, read_db on the artifact, collection `data/users/me`, doc `lf-tags`. Save its data as my_tags.json in this folder ({"tags": [{"artist", "lane", "at"}, ...]}). If there's no such doc, skip this. buckets6.py applies these tags over its own lists, and they always win. Do the same for doc `lf-strays` (his Keep it coming / Not a stray votes on the strays shelf), saved as my_strays.json ({"items": [{"artist", "track", "vote", "at"}, ...]}); strays_build.py drops Not a stray songs and boosts kept ones. Mention any newly applied tags or votes in the reply.
 3. Run `bash refresh_all.sh`. Its last step, bundle_build.py, packs every out/*.csv into out/bundle.json.
 4. Upload out/bundle.json as an asset to the artifact, then update datasets/bundle in one write: source.url to the new /_blob/ url and updated.at to the current time (check the clock, don't guess).
 5. Album covers are separate (datasets/album_art). Only if art_merged.json changed, upload it the same way and update datasets/album_art.
@@ -17,6 +17,7 @@ Your judgment lives in these files:
 - life.py / life_build.py: life chapters, work and school periods, milestones
 - screams_build.py: core and some-screams tiers
 - emo_build.py: waves and feels for the pop punk to emo map
+- strays_build.py: the rule for the strays shelf (outside the lanes, at least half the artist's plays, 3+ visits 60+ days apart)
 - solar_positions.json: last galaxy layout, so the map stays stable between refreshes
 - page/: the dashboard's HTML and JS
 
