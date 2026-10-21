@@ -1,11 +1,14 @@
-# Capy's Last.fm Almanac, v1 build kit
+# Capy's Last.fm Almanac, build kit (lives in the Almanac folder of troycapybara2/scrobblemaxxing)
 
 Live dashboard: https://claude.ai/artifact/VooHx7b7siDnZjmLSDKAYB
 
-To refresh:
-1. Run `bash fetch.sh`. It pulls data/scrobbles.csv and lastfm_cache/leaderboard_history.json from github.com/troycapybara2/scrobblemaxxing, rebuilds df_raw.pkl and puts art3.json in /tmp. (Older step-by-step notes below still describe what it does.)
-2. Rebuild df_raw.pkl from it (uts > 1e9, ts in America/New_York), then run: bash refresh_all.sh
-3. Upload every changed CSV in out/ to the artifact and point each dataset at its new file.
+To refresh (one upload, one commit):
+1. Pull this Almanac folder from the repo, then run `bash fetch.sh`. It pins to the newest commit, pulls data/scrobbles.csv and lastfm_cache/leaderboard_history.json, rebuilds df_raw.pkl and puts art3.json in /tmp.
+2. Run `bash refresh_all.sh`. Its last step, bundle_build.py, packs every out/*.csv into out/bundle.json.
+3. Upload out/bundle.json as an asset to the artifact, then update datasets/bundle in one write: source.url to the new /_blob/ url and updated.at to the current time (check the clock, don't guess).
+4. Album covers are separate (datasets/album_art). Only if art_merged.json changed, upload it the same way and update datasets/album_art.
+
+How the page reads data: datasets/bundle is the only data file besides album_art. page/bundle.js (files/bundle.js on the artifact) registers one dash.calc per dataset id that unpacks its slice of the bundle, so charts and data-source marks keep using the usual ids. A new CSV in out/ needs its own dash.calc line in bundle.js before the page can see it.
 
 Your judgment lives in these files:
 - buckets6.py: the 25 lanes (B) and the notes inside them (SUB), plus the "with the trop" artist set
@@ -16,6 +19,4 @@ Your judgment lives in these files:
 - solar_positions.json: last galaxy layout, so the map stays stable between refreshes
 - page/: the dashboard's HTML and JS
 
-Fresh-chat refresh (cheapest way to run it):
-1. Start a new chat and upload this zip.
-2. Say: "Unzip the almanac build kit, run bash fetch.sh then bash refresh_all.sh, and update the artifact https://claude.ai/artifact/VooHx7b7siDnZjmLSDKAYB. Compare every rebuilt file to the live one and upload only what changed."
+Fresh-chat refresh: start a new chat and say "Pull the Almanac folder from troycapybara2/scrobblemaxxing, run fetch.sh then refresh_all.sh, and update the artifact https://claude.ai/artifact/VooHx7b7siDnZjmLSDKAYB by uploading the new bundle." No zip needed.

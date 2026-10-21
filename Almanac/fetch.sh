@@ -1,7 +1,9 @@
 #!/bin/bash
 # Pulls everything the build needs from github.com/troycapybara2/scrobblemaxxing, then rebuilds df_raw.pkl.
 set -e
-R=https://raw.githubusercontent.com/troycapybara2/scrobblemaxxing/main
+# Pin to the newest commit: plain .../main links can serve a copy a few minutes old.
+SHA=$(git ls-remote https://github.com/troycapybara2/scrobblemaxxing HEAD | cut -f1)
+R=https://raw.githubusercontent.com/troycapybara2/scrobblemaxxing/$SHA
 curl -sSfL -o latest.csv $R/data/scrobbles.csv
 curl -sSfL -o leaderboard_history.json $R/lastfm_cache/leaderboard_history.json
 cp art3.json /tmp/art3.json

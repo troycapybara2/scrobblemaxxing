@@ -182,6 +182,7 @@ pe=P[(P.rank_proj<=500)&(P.rank_now>500)].reset_index().rename(columns={'index':
 def eta(row,cut):
     if row.per_day<=0: return None
     need=cut-row.plays
+    if max(0,need)/row.per_day>36500: return None  # >100 years out: no date
     return (NOW+pd.Timedelta(days=max(0,need)/row.per_day)).strftime('%Y-%m-%d')
 cut_now=int(R_now.iloc[499].n)
 cand=P[(P.rank_now>500)&(P.per_day>0)].reset_index().rename(columns={'index':'artist'})
