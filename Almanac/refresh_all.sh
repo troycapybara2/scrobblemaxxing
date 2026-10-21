@@ -14,5 +14,6 @@ python3 people_build.py > /dev/null
 python3 emo_build.py > /dev/null
 python3 solar_build.py > /dev/null
 python3 lane_top_build.py > /dev/null
+python3 recent_build.py > /dev/null
 python3 bundle_build.py
 echo built
