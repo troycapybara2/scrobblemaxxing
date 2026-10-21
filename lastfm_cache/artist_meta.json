@@ -2437,5 +2437,18 @@
     "favorite_override": null,
     "listen_more": true,
     "notes": ""
+  },
+  "Faye Webster": {
+    "tags": [
+      "female",
+      "indie",
+      "indie pop"
+    ],
+    "moods": [],
+    "energy": 3,
+    "era": "10s",
+    "favorite_override": null,
+    "listen_more": false,
+    "notes": ""
   }
 }
