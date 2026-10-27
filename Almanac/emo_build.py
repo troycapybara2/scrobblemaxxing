@@ -45,7 +45,11 @@ A={'pp':['State Champs','All Time Low','Four Year Strong','Fireworks','Seaway','
    'emo':['American Football','Algernon Cadwallader','Mom Jeans.','Prince Daddy & The Hyena','Origami Angel','Tiny Moving Parts','Sweet Pill','Snowing'],
    'soft':['Turnover','oso oso','macseal','Super American','Pinegrove','Kississippi','Slaughter Beach, Dog'],
    'heavy':['Ogbert the Nerd','Prince Daddy & The Hyena','Riley!']}
-HEAVY_SET={'Ogbert the Nerd':0.95,'Prince Daddy & The Hyena':0.82,'Riley!':0.8,'American Football':0.22}
+HEAVY_SET={'Ogbert the Nerd':0.95,'Prince Daddy & The Hyena':0.82,'Riley!':0.8,'American Football':0.22,
+           # Capy's heavy order from the categorizing game: Ogbert > Prince Daddy > Origami Angel = Hot Mulligan > Mom Jeans.; Title Fight > Tigers Jaw
+           'Origami Angel':0.47,'Hot Mulligan':0.47,'Mom Jeans.':0.42}
+# Capy's calls on the pop punk (0) to emo (1) axis: Real Friends and The Wonder Years are pop punk; Modern Baseball and Joyce Manor lean emo
+EMO_SET={'Real Friends':0.24,'The Wonder Years':0.22,'Modern Baseball':0.66,'Joyce Manor':0.66}
 A={k:[a for a in v if a in EMO] for k,v in A.items()}
 def score(b,k): 
     xs=[np.log(lift(b,a)) for a in A[k] if a!=b]; return np.mean(xs) if xs else 0
@@ -58,6 +62,7 @@ for b in EMO:
     py={'Screamed':0.8,'Some screams':0.6,'Pop-punk leaning':0.35,'Indie emo':0.1,'Twinkle':0.45}.get(f,0.4)
     x=0.5*px+0.5*cx; yv=0.7*py+0.3*cy
     if b in HEAVY_SET: yv=HEAVY_SET[b]
+    if b in EMO_SET: x=EMO_SET[b]
     rows.append(dict(artist=b,lane=LANE.get(b),wave=wave[b],feel=feel.get(b,''),plays=int(vc[b]),plays_since_2023=int((df[df.artist==b].y>=2023).sum()),
         peak_year=int(df[df.artist==b].y.value_counts().idxmax()),emo_score=round(x,3),heavy_score=round(yv,3)))
 R=pd.DataFrame(rows).sort_values('plays',ascending=False)

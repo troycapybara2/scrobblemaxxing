@@ -104,3 +104,23 @@ K = [('window_start', str(w0.date()), 'First day of the last 7 days'), ('window_
 pd.DataFrame(K, columns=['metric', 'value', 'label']).to_csv(O + 'recent_week.csv', index=False)
 print(pd.DataFrame(K, columns=['metric', 'value', 'label'])[['metric', 'value']].to_string(index=False))
 print(E7.to_string(index=False)); print(B[B.week == B.week.max()].head(10).to_string(index=False)); print(LM.head(8).to_string(index=False)); print(NA.head(12).to_string(index=False))
+
+# ---------- while you were away: only when the last refresh was 14+ days before the latest scrobble ----------
+# The refresh chat writes last_refresh.txt (the date the live almanac was last updated) before running the build.
+import os
+since = None
+if os.path.exists('last_refresh.txt'):
+    try: since = pd.Timestamp(open('last_refresh.txt').read().strip()[:10]).tz_localize('America/New_York')
+    except Exception: since = None
+show = since is not None and (NOW - since).days >= 14
+AW = [('show', 'yes' if show else 'no', 'Show the recap (last refresh 14+ days before the latest scrobble)')]
+top = []
+if show:
+    g = d[d.ts >= since]; fa = first[first >= since]
+    AW += [('since', str(since.date()), 'Last refresh'), ('days_away', (NOW - since).days, 'Days since the last refresh'),
+           ('plays_away', len(g), 'Plays since then'), ('artists_away', g.artist.nunique(), 'Artists played since then'), ('new_artists_away', len(fa), 'First-time artists since then')]
+    for a, n in g.artist.value_counts().head(5).items(): top.append(dict(kind='Artist', name=a, artist=a, plays=int(n)))
+    for (a, t), n in g.groupby(['artist', 'track']).size().sort_values(ascending=False).head(5).items(): top.append(dict(kind='Song', name=t, artist=a, plays=int(n)))
+    for a in fa.sort_values().index[:5]: top.append(dict(kind='New artist', name=a, artist=a, plays=int((g.artist == a).sum())))
+pd.DataFrame(AW, columns=['metric', 'value', 'label']).to_csv(O + 'recent_away.csv', index=False)
+pd.DataFrame(top, columns=['kind', 'name', 'artist', 'plays']).to_csv(O + 'recent_away_top.csv', index=False)

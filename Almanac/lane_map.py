@@ -4,7 +4,7 @@ _src=open('buckets6.py').read(); _i=_src.index('B={'); _j=_src.index("sub={a:k")
 LB=_ns['B']
 U='Underground & rap'; P='Pop, R&B & country'; EM='Emo & indie'; C='Classics'; OT='Other'
 LANEFAM={'Michigan':U,'Underground':U,'SoundCloud':U,'Mainstream':U,'R&B':P,'Alt rap':U,'West coast':U,'Female rap':U,'The new wave (2025–26)':U,'Hyperpop':U,
- 'Pop':P,'Country & folk':P,'Emo revival 2.0':EM,'DIY emo':EM,'Blog-era EDM':C,'Indie emo':EM,'Indie':EM,'Emo revival 1.0':EM,'Warped Tour pop punk (2010s)':EM,'Scene kid (2000s)':EM,'Folk punk':EM,'Hardcore':EM,
+ 'Pop':P,'Country & folk':P,'Emo revival 2.0':EM,'DIY emo':EM,'EDM':'EDM','Indie emo':EM,'Indie':EM,'Emo revival 1.0':EM,'Warped Tour pop punk (2010s)':EM,'Scene kid (2000s)':EM,'Folk punk':EM,'Hardcore':EM,
  'Old rock appreciation':C,'Appreciating the greats':C,'Old rap':C,'Blog-era nostalgia':C,'Grab bag':OT,'TikTok one-hit wonders':OT,'Instrumental':OT}
 LSEED={a:k for k,v in LB.items() for a in v.split('|')}
 def build_lanes(df):

@@ -16,5 +16,13 @@ python3 solar_build.py > /dev/null
 python3 lane_top_build.py > /dev/null
 python3 recent_build.py > /dev/null
 python3 strays_build.py
+python3 gone_build.py > /dev/null
+python3 bridges_build.py > /dev/null
+python3 drives_build.py > /dev/null
+python3 power_build.py > /dev/null
+python3 sounds_build.py > /dev/null
+python3 places_build.py > /dev/null
+python3 arcs_build.py > /dev/null
+python3 next_build.py > /dev/null
 python3 bundle_build.py
 echo built

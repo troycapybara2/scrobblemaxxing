@@ -53,7 +53,7 @@ for a in vc.head(1000).index:
 exec(open('lane_map.py').read())
 LANE,LANEHOW=build_lanes(df)
 scene=dict(LANE)
-FAM_ORDER=['Emo & indie','Underground & rap','Pop, R&B & country','Classics','Other','Long tail']
+FAM_ORDER=['Emo & indie','Underground & rap','Pop, R&B & country','EDM','Classics','Other','Long tail']
 df['scene']=df.artist.map(scene).fillna('Long tail')
 df['family']=df.scene.map(LANEFAM).fillna('Long tail')
 pd.DataFrame([dict(artist=a,lane=l,how=LANEHOW[a]) for a,l in LANE.items()]).to_csv('artist_lanes.csv',index=False)

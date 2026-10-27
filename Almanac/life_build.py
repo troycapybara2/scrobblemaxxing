@@ -10,7 +10,7 @@ for n,a,b,story in CH:
     kc=g.groupby(['artist','track']).size().sort_values(ascending=False)
     rk=rest.groupby(['artist','track']).size()
     lift=(kc/len(g))/((rk.reindex(kc.index).fillna(0)+1)/len(rest))
-    dfn=lift[kc>=15].sort_values(ascending=False).index[0]
+    dfn=lift[kc>=min(15,kc.max())].sort_values(ascending=False).index[0]  # short, still-running eras may not have a 15-play song yet
     al=g[g.album!=''].groupby(['artist','album']).size().sort_values(ascending=False)
     rows.append(dict(chapter=n,start=a,end=(end-pd.Timedelta(days=1)).strftime('%Y-%m-%d'),story=story,days=days,scrobbles=len(g),per_day=round(len(g)/days,1),
       top_artist=g.artist.value_counts().index[0],top_artist_plays=int(g.artist.value_counts().iloc[0]),
@@ -18,20 +18,20 @@ for n,a,b,story in CH:
       defining_track=f"{dfn[1]} ({dfn[0]})",night_share=round(((g.h>=22)|(g.h<4)).mean(),3),weekend_share=round((g.dow>=5).mean(),3),
       top_scene=g[g.scene!='Long tail'].scene.value_counts().index[0]))
 L=pd.DataFrame(rows); L.to_csv(O+'life_chapters.csv',index=False)
-PER=[('Minute Media','2019-10-28','2025-09-20','NYC office, then remote through COVID and beyond'),('Villanova MBA','2023-01-18','2025-05-18','Grad school, alongside Minute Media'),('Elite','2025-10-06','2026-08-02','Working at Elite')]
+PER=[('Minute Media','2019-10-28','2025-09-20','NYC office, then remote through COVID and beyond'),('Villanova MBA','2023-01-18','2025-05-18','Grad school, alongside Minute Media'),('Elite','2025-10-06','2026-08-02','Working at Elite'),('Glenmede','2026-09-14','2100-01-01','Started Sep 14, 2026')]
 prow=[]
 for n,a,b_,story in PER:
     m=(df.ts>=T(a))&(df.ts<T(b_)); g=df[m]; rest=df[~m]; days=(min(T(b_),NOW+pd.Timedelta(days=1))-T(a)).days
     kc=g.groupby(['artist','track']).size().sort_values(ascending=False); rk=rest.groupby(['artist','track']).size()
-    lift=(kc/len(g))/((rk.reindex(kc.index).fillna(0)+1)/len(rest)); dfn=lift[kc>=15].sort_values(ascending=False).index[0]
+    lift=(kc/len(g))/((rk.reindex(kc.index).fillna(0)+1)/len(rest)); dfn=lift[kc>=min(15,kc.max())].sort_values(ascending=False).index[0]  # short, still-running eras may not have a 15-play song yet
     al=g[g.album!=''].groupby(['artist','album']).size().sort_values(ascending=False)
     wd=g[g.dow<5]; work=wd[(wd.h>=9)&(wd.h<17)]
-    prow.append(dict(period=n,start=a,end=(T(b_)-pd.Timedelta(days=1)).strftime('%Y-%m-%d'),story=story,days=days,scrobbles=len(g),per_day=round(len(g)/days,1),
+    prow.append(dict(period=n,start=a,end=(min(T(b_),NOW+pd.Timedelta(days=1))-pd.Timedelta(days=1)).strftime('%Y-%m-%d'),story=story,days=days,scrobbles=len(g),per_day=round(len(g)/days,1),
       top_artist=g.artist.value_counts().index[0],top_artist_plays=int(g.artist.value_counts().iloc[0]),top_track=f"{kc.index[0][1]} ({kc.index[0][0]})",top_track_plays=int(kc.iloc[0]),
       top_album=f"{al.index[0][1]} ({al.index[0][0]})",defining_track=f"{dfn[1]} ({dfn[0]})",top_scene=g[g.scene!='Long tail'].scene.value_counts().index[0],
       workday_share=round(len(work)/len(g),3),workday_top_artist=work.artist.value_counts().index[0] if len(work) else ''))
 pd.DataFrame(prow).to_csv(O+'life_periods.csv',index=False); print(pd.DataFrame(prow).T.to_string()); print(L[['chapter','end','per_day','top_track','defining_track']].to_string())
-mk=sorted([('2015-08-31','Start of college'),('2019-10-28','First day at Minute Media (NYC office)'),('2020-03-16','COVID lockdown'),('2020-09-01','Move to Bloomfield, NJ'),('2021-09-01','Move to Philly'),('2023-01-18','Started the Villanova MBA'),('2024-09-01','Move to Bristol with Katie'),('2024-11-01','Engaged'),('2025-05-17','MBA graduation'),('2025-09-19','Last day at Minute Media'),('2025-10-06','Started at Elite'),('2026-08-01','Last day at Elite'),('2026-08-09','Wedding')])
+mk=sorted([('2015-08-31','Start of college'),('2019-10-28','First day at Minute Media (NYC office)'),('2020-03-16','COVID lockdown'),('2020-09-01','Move to Bloomfield, NJ'),('2021-09-01','Move to Philly'),('2023-01-18','Started the Villanova MBA'),('2024-09-01','Move to Bristol with Katie'),('2024-11-01','Engaged'),('2025-05-17','MBA graduation'),('2025-09-19','Last day at Minute Media'),('2025-10-06','Started at Elite'),('2026-08-01','Last day at Elite'),('2026-08-09','Wedding'),('2026-09-14','Started at Glenmede')])
 mr=[]
 for d,l in mk:
     s=T(d); g=df[(df.ts>=s)&(df.ts<s+pd.Timedelta(days=30))]; kc=g.groupby(['artist','track']).size().sort_values(ascending=False)

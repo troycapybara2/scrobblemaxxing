@@ -10,7 +10,8 @@ CH=[('High school','2011-07-01','2015-08-31','Bus rides, blog rap and the scene 
 ('COVID at home','2020-03-16','2020-09-01','Lockdown'),
 ('Bloomfield, NJ','2020-09-01','2021-09-01','First place after lockdown'),
 ('Philly','2021-09-01','2024-09-01','Three years in Philadelphia'),
-('Bristol with Katie','2024-09-01','2026-10-16','Moving in together, then engaged in Nov 2024')]
+('Bristol with Katie','2024-09-01','2026-09-14','Moving in together, engaged in Nov 2024, married Aug 2026'),
+('Glenmede','2026-09-14','2100-01-01','Married, settled in Bristol, and a new job at Glenmede: the right-now era')]
 def chap(ts):
     for n,a,b,_ in CH:
         if T(a)<=ts<T(b): return n

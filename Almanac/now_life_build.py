@@ -5,7 +5,7 @@ O='out/'
 U='Underground & rap'
 FAM={'Michigan':U,'Underground':U,'SoundCloud':U,'Mainstream':U,'Alt rap':U,'West coast':U,'Female rap':U,'Hyperpop':U,
 'Pop':'Pop, R&B & country','R&B':'Pop, R&B & country','Country & folk':'Pop, R&B & country',
-'Emo revival 2.0':'Emo & indie','DIY emo':'Emo & indie','Blog-era EDM':'Classics','Indie emo':'Emo & indie','Indie':'Emo & indie','Emo revival 1.0':'Emo & indie','Warped Tour pop punk (2010s)':'Emo & indie','Scene kid (2000s)':'Emo & indie',
+'Emo revival 2.0':'Emo & indie','DIY emo':'Emo & indie','EDM':'EDM','Indie emo':'Emo & indie','Indie':'Emo & indie','Emo revival 1.0':'Emo & indie','Warped Tour pop punk (2010s)':'Emo & indie','Scene kid (2000s)':'Emo & indie',
 'Old rock appreciation':'Classics','Appreciating the greats':'Classics','Old rap':'Classics','Folk punk':'Emo & indie','Blog-era nostalgia':'Classics','Grab bag':'Other','Everything else':'Other'}
 ORDER=list(FAM)
 E['y']=E.ts.dt.year; E['we']=E.ts.dt.dayofweek>=5
