@@ -4,7 +4,7 @@ compatibility_date = "2025-09-01"
 
 [vars]
 # Your Last.fm username (public, not a secret)
-LASTFM_USER = "YOUR_LASTFM_USERNAME"
+LASTFM_USER = "troycapybara"
 
 # Secrets are NOT stored here. Set them with:
 #   npx wrangler secret put LASTFM_API_KEY
