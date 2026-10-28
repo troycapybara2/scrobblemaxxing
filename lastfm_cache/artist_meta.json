@@ -2464,5 +2464,21 @@
     "favorite_override": null,
     "listen_more": false,
     "notes": ""
+  },
+  "Anderson .Paak": {
+    "tags": [
+      "R&B",
+      "rap"
+    ],
+    "moods": [
+      "bopping",
+      "cool",
+      "groovy"
+    ],
+    "energy": 3,
+    "era": "10s",
+    "favorite_override": null,
+    "listen_more": false,
+    "notes": ""
   }
 }
