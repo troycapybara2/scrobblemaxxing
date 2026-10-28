@@ -1,5 +1,5 @@
 name = "lastfm-mcp"
-main = "src/index.js"
+main = "SRC/index.js"
 compatibility_date = "2025-09-01"
 
 [vars]
