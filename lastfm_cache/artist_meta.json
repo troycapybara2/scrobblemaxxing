@@ -2480,5 +2480,21 @@
     "favorite_override": null,
     "listen_more": false,
     "notes": ""
+  },
+  "Man Overboard": {
+    "tags": [
+      "pop punk",
+      "rock",
+      "alternative"
+    ],
+    "moods": [
+      "angsty",
+      "khaki shorts"
+    ],
+    "energy": 4,
+    "era": "10s",
+    "favorite_override": null,
+    "listen_more": false,
+    "notes": ""
   }
 }
