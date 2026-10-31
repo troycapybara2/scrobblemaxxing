@@ -22,6 +22,12 @@ python3 drives_build.py > /dev/null
 python3 power_build.py > /dev/null
 python3 sounds_build.py > /dev/null
 python3 places_build.py > /dev/null
+python3 maptime_build.py > /dev/null
+python3 firsts_build.py > /dev/null
+python3 months_build.py > /dev/null
+python3 streaks_build.py > /dev/null
+python3 heatyear_build.py > /dev/null
+if [ -f own_build.py ]; then python3 own_build.py > /dev/null; fi   # Own it tab (albums worth owning); added in its own chat
 python3 arcs_build.py > /dev/null
 python3 next_build.py > /dev/null
 python3 bundle_build.py

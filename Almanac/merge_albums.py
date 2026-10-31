@@ -11,6 +11,9 @@ df['album']=[m.get((a,x),x) if x else x for a,x in zip(df.artist,df.album)]
 df.to_pickle('df.pkl')
 # album art: add rows under merged display names
 P='/tmp/art3.json'; art=json.load(open(P)); rows=[]; have=set()
+# covers Capy sent himself (my_covers.json, same 'Artist || Album' keys) win over the downloaded ones
+import os
+if os.path.exists('my_covers.json'): art.update(json.load(open('my_covers.json')))
 for k,v in art.items():
     if not v: continue
     a,x=k.split(' || ',1); d=disp.get((a,base(x).lower()), base(x))
