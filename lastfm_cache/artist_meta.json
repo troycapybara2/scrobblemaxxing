@@ -2520,5 +2520,20 @@
     "favorite_override": null,
     "listen_more": false,
     "notes": ""
+  },
+  "Chappell Roan": {
+    "tags": [
+      "female",
+      "pop"
+    ],
+    "moods": [
+      "girlypop",
+      "normie"
+    ],
+    "energy": 3,
+    "era": "2020s",
+    "favorite_override": null,
+    "listen_more": false,
+    "notes": ""
   }
 }
