@@ -2535,5 +2535,20 @@
     "favorite_override": null,
     "listen_more": false,
     "notes": ""
+  },
+  "That's Outrageous!": {
+    "tags": [
+      "screaming",
+      "post-hardcore"
+    ],
+    "moods": [
+      "Scene Kid",
+      "angsty"
+    ],
+    "energy": 3,
+    "era": "10s",
+    "favorite_override": null,
+    "listen_more": false,
+    "notes": ""
   }
 }
